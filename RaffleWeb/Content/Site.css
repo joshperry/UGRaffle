@@ -1,0 +1,60 @@
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error
+{
+    color: #ff0000;
+}
+
+.field-validation-valid
+{
+    display: none;
+}
+
+.input-validation-error
+{
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors
+{
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid
+{
+    display: none;
+}
+
+html, body 
+{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+html
+{
+    background: #86C9EF url('bg.png') repeat-x bottom left;
+}
+
+body 
+{
+    background-image: url('roll.png');
+    background-position: left;
+    background-repeat: no-repeat;
+}
+
+#header h1
+{
+
+    font-family: Arial;
+    font-size: 5em;
+}
+
+#content 
+{
+    width: 850px;
+    margin: auto;
+}

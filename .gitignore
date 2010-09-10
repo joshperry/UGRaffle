@@ -1,0 +1,9 @@
+*.user
+[bB]in/
+[oO]bj/
+*.xap
+_ReSharper.*
+*.suo
+*.sln.cache
+TestResults/
+App_Data/
