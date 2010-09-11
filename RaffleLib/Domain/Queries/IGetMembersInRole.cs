@@ -6,8 +6,8 @@ using RaffleLib.Domain.Entities;
 
 namespace RaffleLib.Domain.Queries
 {
-    public interface IGetUserByEmailAndPassword : IQuery
+    public interface IGetMembersInRole : IQuery
     {
-        Member Result(string username, string password);
+        IQueryable<Member> Result(string role);
     }
 }

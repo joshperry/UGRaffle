@@ -14,7 +14,7 @@ namespace RaffleLib.Domain.Queries
             _repo = repo;
         }
 
-        public IEnumerable<Meeting> Result(int pagesize = 100, int pagenum = 1)
+        public IQueryable<Meeting> Result(int pagesize = 100, int pagenum = 1)
         {
             return _repo.Query.Skip(pagesize * (pagenum-1)).Take(pagesize);
         }

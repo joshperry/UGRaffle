@@ -58,12 +58,16 @@
     <Compile Include="Domain\Queries\GetAllMeetings.cs" />
     <Compile Include="Domain\Queries\GetCurrentMeetingAndRaffleItems.cs" />
     <Compile Include="Domain\Queries\GetMeetingById.cs" />
-    <Compile Include="Domain\Queries\GetUserByEmailAndPassword.cs" />
+    <Compile Include="Domain\Queries\GetMemberByEmail.cs" />
+    <Compile Include="Domain\Queries\GetMembersInRole.cs" />
+    <Compile Include="Domain\Queries\IGetMemberByEmail.cs" />
+    <Compile Include="Domain\Queries\IGetMembersInRole.cs" />
+    <Compile Include="Domain\Queries\GetMemberByCredentials.cs" />
     <Compile Include="Domain\IEntityRepository.cs" />
     <Compile Include="Domain\Queries\IGetAllMeetings.cs" />
     <Compile Include="Domain\Queries\IGetCurrentMeetingAndRaffleItems.cs" />
     <Compile Include="Domain\Queries\IGetMeetingById.cs" />
-    <Compile Include="Domain\Queries\IGetUserByEmailAndPassword.cs" />
+    <Compile Include="Domain\Queries\IGetUserByCredentials.cs" />
     <Compile Include="Domain\Queries\IQuery.cs" />
     <Compile Include="Domain\Repositories\Fake\FakeMeetingRepository.cs" />
     <Compile Include="Domain\Repositories\Fake\FakeRepositoryModule.cs" />
@@ -74,6 +78,7 @@
     <Compile Include="Domain\Repositories\NHibernateRepositories\NHibernateMeetingRepository.cs" />
     <Compile Include="Domain\Repositories\NHibernateRepositories\NHibernateMemberRepository.cs" />
     <Compile Include="Domain\Repositories\NHibernateRepositories\NHibernateRepositoryModule.cs" />
+    <Compile Include="Ensure.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\IHasher.cs" />
     <Compile Include="Security\Sha256Hasher.cs" />

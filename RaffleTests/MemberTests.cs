@@ -11,6 +11,7 @@ using RaffleLib.Domain.Queries;
 using RaffleWeb.Controllers;
 using System.Web.Mvc;
 using RaffleWeb.Infrastructure.Auth;
+using RaffleLib.Security;
 
 namespace RaffleTests
 {
@@ -18,10 +19,42 @@ namespace RaffleTests
     public class MemberTests
     {
         [TestMethod]
+        public void Can_query_members_in_role()
+        {
+            var roles = new string[] { "Admin" };
+            var members = new Member[] { new Member { Roles = roles} };
+            var repo = new Mock<IEntityRepository<Member>>();
+            repo.SetupGet(x => x.Query).Returns(members.AsQueryable);
+
+            var result = new GetMembersInRole(repo.Object).Result(roles[0]);
+
+            Assert.AreEqual(1, result.Count());
+            Assert.AreEqual(members[0], result.FirstOrDefault());
+        }
+
+        [TestMethod]
+        public void Can_query_members_by_credentials()
+        {
+            string email = "josh@6bit.com";
+            string password = "password";
+            string hash = "333";
+            var members = new Member[] { new Member { Email = email, PasswordHash = hash } };
+            var repo = new Mock<IEntityRepository<Member>>();
+            repo.SetupGet(x => x.Query).Returns(members.AsQueryable);
+            var hasher = new Mock<IHasher>();
+            hasher.Setup(x => x.Hash(password)).Returns(hash).Verifiable();
+
+            var result = new GetMemberByCredentials(repo.Object, hasher.Object).Result(email, password);
+
+            hasher.Verify();
+            Assert.AreEqual(members[0], result);
+        }
+
+        [TestMethod]
         public void Can_login_member_with_redirect_url()
         {
             var login = new LoginViewModel { Email = "me@example.com", Password = "password" };
-            var query = new Mock<IGetUserByEmailAndPassword>();
+            var query = new Mock<IGetUserByCredentials>();
             query.Setup(x => x.Result(login.Email, login.Password)).Returns(new Member());
             var auth = new Mock<IFormsAuthentication>();
             auth.Setup(x => x.SetAuthCookie(login.Email, false)).Verifiable();
@@ -37,7 +70,7 @@ namespace RaffleTests
         public void Can_login_member_without_redirect_url()
         {
             var login = new LoginViewModel { Email = "me@example.com", Password = "password" };
-            var query = new Mock<IGetUserByEmailAndPassword>();
+            var query = new Mock<IGetUserByCredentials>();
             query.Setup(x => x.Result(login.Email, login.Password)).Returns(new Member());
             var auth = new Mock<IFormsAuthentication>();
             auth.Setup(x => x.SetAuthCookie(login.Email, false)).Verifiable();
@@ -53,7 +86,7 @@ namespace RaffleTests
         public void Can_not_login_with_bad_credentials()
         {
             var login = new LoginViewModel { Email = "me@example.com", Password = "password" };
-            var query = new Mock<IGetUserByEmailAndPassword>();
+            var query = new Mock<IGetUserByCredentials>();
             query.Setup(x => x.Result(login.Email, login.Password)).Returns((Member)null);
             var auth = new Mock<IFormsAuthentication>();
 

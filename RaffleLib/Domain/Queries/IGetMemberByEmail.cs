@@ -6,8 +6,8 @@ using RaffleLib.Domain.Entities;
 
 namespace RaffleLib.Domain.Queries
 {
-    public interface IGetAllMeetings : IQuery
+    public interface IGetMemberByEmail : IQuery
     {
-        IQueryable<Meeting> Result(int pagesize = 100, int pagenum = 1);
+        Member Result(string email);
     }
 }

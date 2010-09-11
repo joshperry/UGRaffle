@@ -26,7 +26,7 @@ namespace RaffleWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(IGetUserByEmailAndPassword query, LoginViewModel model, string returnUrl)
+        public ActionResult Login(IGetUserByCredentials query, LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {

@@ -8,9 +8,14 @@ namespace RaffleLib.Domain.Entities
 {
     public class Meeting
     {
+        public Meeting()
+        {
+            RaffleItems = new List<RaffleItem>();
+        }
+
         public virtual Guid Id { get; set; }
 
-        [Required(ErrorMessage="Please supply a date")]
+        [Required(ErrorMessage="  a date")]
         [DataType(DataType.Date)]
         public virtual DateTime Date { get; set; }
 

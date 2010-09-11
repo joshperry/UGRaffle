@@ -23,6 +23,7 @@ namespace RaffleWeb.Controllers
             return View(query.Result());
         }
 
+        [Authorize(Roles="Admin")]
         public ViewResult List(IGetAllMeetings query)
         {
             return View(query.Result());

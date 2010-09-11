@@ -82,7 +82,7 @@ namespace RaffleTests
         {
             var meetings = new Meeting[] { new Meeting(), new Meeting() };
             var query = new Mock<IGetAllMeetings>();
-            query.Setup(x => x.Result(100, 1)).Returns(meetings);
+            query.Setup(x => x.Result(100, 1)).Returns(meetings.AsQueryable());
 
             var result = new MeetingController(null).List(query.Object);
 
