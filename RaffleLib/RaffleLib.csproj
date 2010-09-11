@@ -67,6 +67,8 @@
     <Compile Include="Domain\Queries\IQuery.cs" />
     <Compile Include="Domain\Repositories\Fake\FakeMeetingRepository.cs" />
     <Compile Include="Domain\Repositories\Fake\FakeRepositoryModule.cs" />
+    <Compile Include="Domain\Repositories\NHibernateRepositories\CsvUserType.cs" />
+    <Compile Include="Domain\Repositories\NHibernateRepositories\MappingOverrides\MemberOverride.cs" />
     <Compile Include="Domain\Repositories\NHibernateRepositories\NHibernateConfigModule.cs" />
     <Compile Include="Domain\Repositories\NHibernateRepositories\NHibernateConfigurator.cs" />
     <Compile Include="Domain\Repositories\NHibernateRepositories\NHibernateMeetingRepository.cs" />

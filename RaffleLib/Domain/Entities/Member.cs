@@ -12,5 +12,6 @@ namespace RaffleLib.Domain.Entities
         public virtual string Email { get; set; }
         public virtual string PasswordHash { get; set; }
         public virtual int TicketCount { get; set; }
+        public virtual IList<string> Roles { get; set; }
     }
 }

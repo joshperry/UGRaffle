@@ -59,7 +59,8 @@ namespace RaffleTests
 
             var result = new MemberController(auth.Object).Login(query.Object, login, null) as ViewResult;
 
-            auth.Verify(x => x.SetAuthCookie(It.IsAny<string>(), It.IsAny<bool>()), Times.Never(), "Auth cookie shouldn't be set with bad creds");
+            auth.Verify(x => x.SetAuthCookie(It.IsAny<string>(), It.IsAny<bool>()),
+                Times.Never(), "Auth cookie shouldn't be set with bad creds");
             Assert.IsNotNull(result, "Response was not a view");
             Assert.AreEqual(string.Empty, result.ViewName);
         }
