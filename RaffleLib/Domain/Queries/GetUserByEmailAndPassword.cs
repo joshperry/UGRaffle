@@ -3,24 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RaffleLib.Domain.Entities;
-using System.Security.Cryptography;
+using RaffleLib.Security;
 
 namespace RaffleLib.Domain.Queries
 {
-    public class GetUserByEmailAndPassword : IQuery
+    public class GetUserByEmailAndPassword : IGetUserByEmailAndPassword
     {
         IEntityRepository<Member> _repo;
-        public GetUserByEmailAndPassword(IEntityRepository<Member> repo)
+        IHasher _hasher;
+        public GetUserByEmailAndPassword(IEntityRepository<Member> repo, IHasher hasher)
         {
             _repo = repo;
+            _hasher = hasher;
         }
 
         public Member Result(string email, string password)
         {
-            string hashpass = BitConverter.ToString(
-                new SHA256CryptoServiceProvider()
-                .ComputeHash(System.Text.Encoding.ASCII.GetBytes(password))
-                ).Replace("-", "").ToLowerInvariant();
+            string hashpass = _hasher.Hash(password);
 
             return _repo.Query
                 .Where(m => m.Email == email && m.PasswordHash == hashpass)

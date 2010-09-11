@@ -81,7 +81,7 @@
       <Project>{3F7C644F-0CC8-4216-9C1E-667A50085CFF}</Project>
       <Name>RaffleWeb</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UGRaffleLib\RaffleLib.csproj">
+    <ProjectReference Include="..\RaffleLib\RaffleLib.csproj">
       <Project>{A4DD7B3B-C6E6-4F38-88F7-17486B621C17}</Project>
       <Name>RaffleLib</Name>
     </ProjectReference>

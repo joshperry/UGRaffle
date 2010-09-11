@@ -10,6 +10,7 @@ using RaffleWeb.Models;
 using RaffleLib.Domain.Queries;
 using RaffleWeb.Controllers;
 using System.Web.Mvc;
+using RaffleWeb.Infrastructure.Auth;
 
 namespace RaffleTests
 {
@@ -19,13 +20,15 @@ namespace RaffleTests
         [TestMethod]
         public void Can_login_member_with_redirect_url()
         {
-            var members = new Member[] { new Member { Email = "me@example.com", PasswordHash = "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8" } };
-            var repo = new Mock<IEntityRepository<Member>>();
-            repo.SetupGet(x => x.Query).Returns(members.AsQueryable());
-            var loginModel = new LoginViewModel { Email = "me@example.com", Password = "password" };
+            var login = new LoginViewModel { Email = "me@example.com", Password = "password" };
+            var query = new Mock<IGetUserByEmailAndPassword>();
+            query.Setup(x => x.Result(login.Email, login.Password)).Returns(new Member());
+            var auth = new Mock<IFormsAuthentication>();
+            auth.Setup(x => x.SetAuthCookie(login.Email, false)).Verifiable();
 
-            var result = new MemberController(repo.Object).Login(new GetUserByEmailAndPassword(repo.Object), loginModel, "/blah") as RedirectResult;
+            var result = new MemberController(auth.Object).Login(query.Object, login, "/blah") as RedirectResult;
 
+            auth.Verify();
             Assert.IsNotNull(result, "Response was not a Redirect");
             Assert.AreEqual("/blah", result.Url);
         }
@@ -33,13 +36,15 @@ namespace RaffleTests
         [TestMethod]
         public void Can_login_member_without_redirect_url()
         {
-            var members = new Member[] { new Member { Email = "me@example.com", PasswordHash = "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8" } };
-            var repo = new Mock<IEntityRepository<Member>>();
-            repo.SetupGet(x => x.Query).Returns(members.AsQueryable());
-            var loginModel = new LoginViewModel { Email = "me@example.com", Password = "password" };
+            var login = new LoginViewModel { Email = "me@example.com", Password = "password" };
+            var query = new Mock<IGetUserByEmailAndPassword>();
+            query.Setup(x => x.Result(login.Email, login.Password)).Returns(new Member());
+            var auth = new Mock<IFormsAuthentication>();
+            auth.Setup(x => x.SetAuthCookie(login.Email, false)).Verifiable();
 
-            var result = new MemberController(repo.Object).Login(new GetUserByEmailAndPassword(repo.Object), loginModel, null) as RedirectResult;
+            var result = new MemberController(auth.Object).Login(query.Object, login, null) as RedirectResult;
 
+            auth.Verify();
             Assert.IsNotNull(result, "Response was not a Redirect");
             Assert.AreEqual("~/", result.Url);
         }
@@ -47,13 +52,14 @@ namespace RaffleTests
         [TestMethod]
         public void Can_not_login_with_bad_credentials()
         {
-            var members = new Member[] { new Member { Email = "me@example.com", PasswordHash = "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8" } };
-            var repo = new Mock<IEntityRepository<Member>>();
-            repo.SetupGet(x => x.Query).Returns(members.AsQueryable());
-            var loginModel = new LoginViewModel { Email = "me@example.com", Password = "nottapassword" };
+            var login = new LoginViewModel { Email = "me@example.com", Password = "password" };
+            var query = new Mock<IGetUserByEmailAndPassword>();
+            query.Setup(x => x.Result(login.Email, login.Password)).Returns((Member)null);
+            var auth = new Mock<IFormsAuthentication>();
 
-            var result = new MemberController(repo.Object).Login(new GetUserByEmailAndPassword(repo.Object), loginModel, null) as ViewResult;
+            var result = new MemberController(auth.Object).Login(query.Object, login, null) as ViewResult;
 
+            auth.Verify(x => x.SetAuthCookie(It.IsAny<string>(), It.IsAny<bool>()), Times.Never(), "Auth cookie shouldn't be set with bad creds");
             Assert.IsNotNull(result, "Response was not a view");
             Assert.AreEqual(string.Empty, result.ViewName);
         }

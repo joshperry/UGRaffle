@@ -8,15 +8,16 @@ using RaffleLib.Domain;
 using RaffleLib.Domain.Queries;
 using RaffleWeb.Models;
 using System.Web.Security;
+using RaffleWeb.Infrastructure.Auth;
 
 namespace RaffleWeb.Controllers
 {
     public class MemberController : Controller
     {
-        private IEntityRepository<Member> _repo;
-        public MemberController(IEntityRepository<Member> repo)
+        private IFormsAuthentication _auth;
+        public MemberController(IFormsAuthentication auth)
         {
-            _repo = repo;
+            _auth = auth;
         }
 
         public ViewResult Login()
@@ -25,7 +26,7 @@ namespace RaffleWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(GetUserByEmailAndPassword query, LoginViewModel model, string returnUrl)
+        public ActionResult Login(IGetUserByEmailAndPassword query, LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -36,7 +37,7 @@ namespace RaffleWeb.Controllers
 
             if (ModelState.IsValid)
             {
-                FormsAuthentication.SetAuthCookie(model.Email, false);
+                _auth.SetAuthCookie(model.Email, false);
                 return Redirect(returnUrl ?? "~/");
             }
             else

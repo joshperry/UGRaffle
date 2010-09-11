@@ -18,17 +18,17 @@ namespace RaffleWeb.Controllers
             _meetingRepo = meetingRepo;
         }
 
-        public ViewResult Index(GetCurrentMeetingAndRaffleItems query)
+        public ViewResult Index(IGetCurrentMeetingAndRaffleItems query)
         {
             return View(query.Result());
         }
 
-        public ViewResult List(GetAllMeetings query)
+        public ViewResult List(IGetAllMeetings query)
         {
             return View(query.Result());
         }
 
-        public RedirectToRouteResult Delete(GetMeetingById query, Guid id)
+        public RedirectToRouteResult Delete(IGetMeetingById query, Guid id)
         {
             var meeting = query.Result(id);
             if (meeting != null)
@@ -53,7 +53,7 @@ namespace RaffleWeb.Controllers
             return RedirectToAction("List");
         }
 
-        public ViewResult Edit(GetMeetingById query, Guid id)
+        public ViewResult Edit(IGetMeetingById query, Guid id)
         {
             var meeting = query.Result(id);
 

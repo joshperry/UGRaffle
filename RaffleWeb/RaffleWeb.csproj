@@ -91,6 +91,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Auth\AuthModule.cs" />
+    <Compile Include="Infrastructure\Auth\FormsAuthenticationService.cs" />
+    <Compile Include="Infrastructure\Auth\IFormsAuthentication.cs" />
     <Compile Include="Infrastructure\NinjectControllerFactory\ConventionControllerFinder.cs" />
     <Compile Include="Infrastructure\NinjectControllerFactory\NinjectControllerFactory.cs" />
     <Compile Include="Infrastructure\NinjectControllerFactory\NinjectControllerModule.cs" />
@@ -135,7 +138,7 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UGRaffleLib\RaffleLib.csproj">
+    <ProjectReference Include="..\RaffleLib\RaffleLib.csproj">
       <Project>{A4DD7B3B-C6E6-4F38-88F7-17486B621C17}</Project>
       <Name>RaffleLib</Name>
     </ProjectReference>

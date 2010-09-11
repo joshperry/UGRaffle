@@ -68,10 +68,10 @@ namespace RaffleTests
         public void Can_view_current_meeting()
         {
             var meeting = new Meeting { Date = DateTime.Today };
-            var repo = GetMeetingRepoMock(meeting);
-            var query = new GetCurrentMeetingAndRaffleItems(repo.Object);
+            var query = new Mock<IGetCurrentMeetingAndRaffleItems>();
+            query.Setup(x => x.Result()).Returns(meeting);
 
-            var result = new MeetingController(repo.Object).Index(query);
+            var result = new MeetingController(null).Index(query.Object);
 
             Assert.AreEqual(meeting, result.ViewData.Model);
             Assert.AreEqual(string.Empty, result.ViewName); // default view
@@ -80,12 +80,13 @@ namespace RaffleTests
         [TestMethod]
         public void Can_view_meeting_list()
         {
-            var repo = GetMeetingRepoMock(new Meeting(), new Meeting());
-            var query = new GetAllMeetings(repo.Object);
+            var meetings = new Meeting[] { new Meeting(), new Meeting() };
+            var query = new Mock<IGetAllMeetings>();
+            query.Setup(x => x.Result(100, 1)).Returns(meetings);
 
-            var result = new MeetingController(repo.Object).List(query);
+            var result = new MeetingController(null).List(query.Object);
 
-            Assert.AreEqual(repo.Object.Query.Count(), ((IEnumerable<Meeting>)result.ViewData.Model).Count());
+            Assert.AreEqual(meetings.Length, ((IEnumerable<Meeting>)result.ViewData.Model).Count());
             Assert.AreEqual(string.Empty, result.ViewName); // default view
         }
 
@@ -109,9 +110,10 @@ namespace RaffleTests
             var meeting = new Meeting();
             var repo = GetMeetingRepoMock(meeting);
             repo.Setup(x => x.Delete(meeting)).Verifiable();
-            var query = new GetMeetingById(repo.Object);
+            var query = new Mock<IGetMeetingById>();
+            query.Setup(x => x.Result(meeting.Id)).Returns(meeting);
 
-            var result = new MeetingController(repo.Object).Delete(query, meeting.Id) as RedirectToRouteResult;
+            var result = new MeetingController(repo.Object).Delete(query.Object, meeting.Id) as RedirectToRouteResult;
 
             repo.Verify();
             Assert.IsNotNull(result, "result was not a redirect");
@@ -123,11 +125,12 @@ namespace RaffleTests
         {
             var meeting = new Meeting();
             var repo = GetMeetingRepoMock(meeting);
-            var query = new GetMeetingById(repo.Object);
+            var query = new Mock<IGetMeetingById>();
+            query.Setup(x => x.Result(meeting.Id)).Returns(meeting);
 
-            var result = new MeetingController(repo.Object).Edit(query, meeting.Id);
+            var result = new MeetingController(repo.Object).Edit(query.Object, meeting.Id);
 
-            repo.VerifyAll();
+            Assert.AreEqual(meeting, result.ViewData.Model);
             Assert.AreEqual(string.Empty, result.ViewName); // default view
         }
 

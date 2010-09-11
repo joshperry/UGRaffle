@@ -6,7 +6,7 @@ using RaffleLib.Domain.Entities;
 
 namespace RaffleLib.Domain.Queries
 {
-    public class GetCurrentMeetingAndRaffleItems : IQuery
+    public class GetCurrentMeetingAndRaffleItems : IGetCurrentMeetingAndRaffleItems
     {
         private IEntityRepository<Meeting> _repo;
         public GetCurrentMeetingAndRaffleItems(IEntityRepository<Meeting> repo)

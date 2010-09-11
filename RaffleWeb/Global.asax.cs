@@ -40,7 +40,8 @@ namespace RaffleWeb
                 new RaffleWeb.Infrastructure.PersistenceConfigurerModule(),
                 new RaffleLib.Domain.Repositories.NHibernateRepositories.NHibernateConfigModule(),
                 new RaffleLib.Domain.Repositories.NHibernateRepositories.NHibernateRepositoryModule(),
-                new RaffleWeb.Infrastructure.SessionPerRequestModule()
+                new RaffleWeb.Infrastructure.SessionPerRequestModule(),
+                new RaffleWeb.Infrastructure.Auth.AuthModule()
             );
 
             ControllerBuilder.Current.SetControllerFactory(new RaffleWeb.Infrastructure.NinjectControllerFactory.NinjectControllerFactory(Kernel));
