@@ -1,7 +1,7 @@
 
 When a room full of software developers meets monthly for skill sharpening and learning you have to wonder why they draw for giveaway items by hand; passing out paper to write your name on, passing them back, put in a box/hat/cup/available-container, held comically high for random's sake.
 
-This application begun as a talk that I presented to the Utah .NET Users Group on MVC and NStack integration. Hopefully it'll mature enough that we can resume the laziness that us nerdy developers are known for, registering for the meeting and raffle items from a chair without any more human interaction than necessary.
+This application begun as a talk that I presented to the [Utah .NET Users Group](http://utahdnug.org/) on MVC and NStack integration. Hopefully it'll mature enough that we can resume the laziness that us nerdy developers are known for, registering for the meeting and raffle items from a chair without any more human interaction than necessary.
 
 Here's a list of initial "User Stories" that describe how I think the system should work:
 
