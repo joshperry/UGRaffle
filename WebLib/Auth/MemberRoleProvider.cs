@@ -11,7 +11,7 @@ using System.Configuration.Provider;
 using System.Transactions;
 using Ninject;
 
-namespace RaffleWeb.Infrastructure.Auth
+namespace WebLib.Auth
 {
     public class MemberRoleProvider : RoleProvider
     {
@@ -28,7 +28,6 @@ namespace RaffleWeb.Infrastructure.Auth
 
         public override void Initialize(string name, System.Collections.Specialized.NameValueCollection config)
         {
-
             base.Initialize(name, config);
         }
 
@@ -36,7 +35,7 @@ namespace RaffleWeb.Infrastructure.Auth
         {
             get
             {
-                return _repo ?? MvcApplication.Kernel.Get<IEntityRepository<Member>>();
+                return _repo;// ?? MvcApplication.Kernel.Get<IEntityRepository<Member>>();
             }
         }
 

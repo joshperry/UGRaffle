@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace RaffleWeb.Infrastructure.Auth
+namespace WebLib.Auth
 {
     /// <summary>
     /// Use this on actions to override an authorize attribute on the controller and allow access to anonymous users

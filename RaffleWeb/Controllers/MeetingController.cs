@@ -7,7 +7,7 @@ using RaffleLib.Domain.Entities;
 using RaffleLib.Domain;
 using RaffleLib.Domain.Queries;
 using RaffleLib.Domain.Repositories.Fake;
-using RaffleWeb.Infrastructure.Auth;
+using WebLib.Auth;
 
 namespace RaffleWeb.Controllers
 {

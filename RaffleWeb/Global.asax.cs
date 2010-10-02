@@ -8,9 +8,6 @@ using Ninject;
 
 namespace RaffleWeb
 {
-    // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
-    // visit http://go.microsoft.com/?LinkId=9394801
-
     public class MvcApplication : System.Web.HttpApplication
     {
         public static IKernel Kernel { get; private set; }
@@ -36,16 +33,16 @@ namespace RaffleWeb
             RegisterRoutes(RouteTable.Routes);
 
             Kernel = new StandardKernel(
-                new RaffleWeb.Infrastructure.NinjectControllerFactory.NinjectControllerModule(System.Reflection.Assembly.GetExecutingAssembly()),
-                new RaffleWeb.Infrastructure.PersistenceConfigurerModule(),
+                new WebLib.Ninject.NinjectControllerModule(System.Reflection.Assembly.GetExecutingAssembly()),
+                new WebLib.PersistenceConfigurerModule(),
                 new RaffleLib.Domain.Repositories.NHibernateRepositories.NHibernateConfigModule(),
                 new RaffleLib.Domain.Repositories.NHibernateRepositories.NHibernateRepositoryModule(),
-                new RaffleWeb.Infrastructure.SessionPerRequestModule(),
-                new RaffleWeb.Infrastructure.Auth.AuthModule()
+                new WebLib.SessionPerRequestModule(),
+                new WebLib.Auth.AuthModule()
             );
 
-            ControllerBuilder.Current.SetControllerFactory(new RaffleWeb.Infrastructure.NinjectControllerFactory.NinjectControllerFactory(Kernel));
-            RaffleWeb.Infrastructure.QueryModelBinder.AddAllBinders(typeof(RaffleLib.Domain.Queries.IQuery).Assembly);
+            ControllerBuilder.Current.SetControllerFactory(new WebLib.Ninject.NinjectControllerFactory(Kernel));
+            WebLib.QueryModelBinder.AddAllBinders(typeof(RaffleLib.Domain.Queries.IQuery).Assembly, Kernel);
         }
     }
 }

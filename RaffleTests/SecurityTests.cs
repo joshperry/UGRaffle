@@ -7,7 +7,7 @@ using Moq;
 using RaffleLib.Security;
 using RaffleLib.Domain.Entities;
 using RaffleLib.Domain;
-using RaffleWeb.Infrastructure.Auth;
+using WebLib.Auth;
 
 namespace RaffleTests
 {

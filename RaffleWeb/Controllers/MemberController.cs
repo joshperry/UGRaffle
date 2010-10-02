@@ -8,7 +8,7 @@ using RaffleLib.Domain;
 using RaffleLib.Domain.Queries;
 using RaffleWeb.Models;
 using System.Web.Security;
-using RaffleWeb.Infrastructure.Auth;
+using WebLib.Auth;
 
 namespace RaffleWeb.Controllers
 {

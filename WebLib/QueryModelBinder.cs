@@ -5,14 +5,16 @@ using System.Web;
 using System.Web.Mvc;
 using Ninject;
 
-namespace RaffleWeb.Infrastructure
+namespace WebLib
 {
     public class QueryModelBinder : IModelBinder
     {
         private Type _concreteQueryType;
-        public QueryModelBinder(Type concreteQueryType)
+        private IKernel _kernel;
+        public QueryModelBinder(Type concreteQueryType, IKernel kernel)
         {
             _concreteQueryType = concreteQueryType;
+            _kernel = kernel;
         }
 
         public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
@@ -20,10 +22,10 @@ namespace RaffleWeb.Infrastructure
             if (bindingContext.Model != null)
                 throw new InvalidOperationException();
 
-            return MvcApplication.Kernel.TryGet(_concreteQueryType);
+            return _kernel.TryGet(_concreteQueryType);
         }
 
-        internal static void AddAllBinders(System.Reflection.Assembly assembly)
+        public static void AddAllBinders(System.Reflection.Assembly assembly, IKernel kernel)
         {
             var queryTypes = assembly.GetExportedTypes()
                 .Where(t => typeof(RaffleLib.Domain.Queries.IQuery).IsAssignableFrom(t));
@@ -32,7 +34,7 @@ namespace RaffleWeb.Infrastructure
             {
                 var queryInterface = queryType.GetInterfaces().Where(i => i.Name.EndsWith(queryType.Name)).FirstOrDefault();
                 if(queryInterface != null)
-                    ModelBinders.Binders.Add(queryInterface, new RaffleWeb.Infrastructure.QueryModelBinder(queryType));
+                    ModelBinders.Binders.Add(queryInterface, new QueryModelBinder(queryType, kernel));
             }
         }
     }

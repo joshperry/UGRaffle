@@ -5,7 +5,7 @@ using System.Web;
 using Ninject.Modules;
 using System.Reflection;
 
-namespace RaffleWeb.Infrastructure.NinjectControllerFactory
+namespace WebLib.Ninject
 {
     public class NinjectControllerModule : NinjectModule
     {

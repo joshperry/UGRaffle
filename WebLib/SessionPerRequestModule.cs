@@ -6,7 +6,7 @@ using Ninject.Modules;
 using Ninject;
 using NHibernate;
 
-namespace RaffleWeb.Infrastructure
+namespace WebLib
 {
     public class SessionPerRequestModule : NinjectModule
     {

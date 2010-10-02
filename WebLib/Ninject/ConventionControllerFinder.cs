@@ -5,7 +5,7 @@ using System.Web;
 using System.Reflection;
 using System.Web.Mvc;
 
-namespace RaffleWeb.Infrastructure.NinjectControllerFactory
+namespace WebLib.Ninject
 {
     public class ConventionControllerFinder
     {

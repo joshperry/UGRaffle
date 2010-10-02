@@ -89,17 +89,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\Auth\AuthModule.cs" />
-    <Compile Include="Infrastructure\Auth\AuthorizeAnonymousAttribute.cs" />
-    <Compile Include="Infrastructure\Auth\FormsAuthenticationService.cs" />
-    <Compile Include="Infrastructure\Auth\IFormsAuthentication.cs" />
-    <Compile Include="Infrastructure\Auth\MemberRoleProvider.cs" />
-    <Compile Include="Infrastructure\NinjectControllerFactory\ConventionControllerFinder.cs" />
-    <Compile Include="Infrastructure\NinjectControllerFactory\NinjectControllerFactory.cs" />
-    <Compile Include="Infrastructure\NinjectControllerFactory\NinjectControllerModule.cs" />
-    <Compile Include="Infrastructure\PersistenceConfigurerModule.cs" />
-    <Compile Include="Infrastructure\QueryModelBinder.cs" />
-    <Compile Include="Infrastructure\SessionPerRequestModule.cs" />
     <Compile Include="Models\IndexViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -145,6 +134,10 @@
     <ProjectReference Include="..\RaffleLib\RaffleLib.csproj">
       <Project>{A4DD7B3B-C6E6-4F38-88F7-17486B621C17}</Project>
       <Name>RaffleLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebLib\WebLib.csproj">
+      <Project>{ECA67321-C608-4D5A-A8B3-2D33725B6F05}</Project>
+      <Name>WebLib</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

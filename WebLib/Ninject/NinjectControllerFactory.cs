@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Ninject;
 
-namespace RaffleWeb.Infrastructure.NinjectControllerFactory
+namespace WebLib.Ninject
 {
     public class NinjectControllerFactory : DefaultControllerFactory
     {

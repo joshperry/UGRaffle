@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace RaffleWeb.Infrastructure.Auth
+namespace WebLib.Auth
 {
     public interface IFormsAuthentication
     {

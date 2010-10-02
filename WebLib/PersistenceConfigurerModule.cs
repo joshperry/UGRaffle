@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Ninject.Modules;
 
-namespace RaffleWeb.Infrastructure
+namespace WebLib
 {
     public class PersistenceConfigurerModule : NinjectModule
     {

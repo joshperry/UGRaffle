@@ -10,7 +10,7 @@ using RaffleWeb.Models;
 using RaffleLib.Domain.Queries;
 using RaffleWeb.Controllers;
 using System.Web.Mvc;
-using RaffleWeb.Infrastructure.Auth;
+using WebLib.Auth;
 using RaffleLib.Security;
 
 namespace RaffleTests
