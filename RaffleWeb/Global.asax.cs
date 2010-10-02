@@ -22,7 +22,7 @@ namespace RaffleWeb
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Meeting", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+                new { controller = "Registration", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
 
         }

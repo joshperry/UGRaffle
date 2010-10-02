@@ -8,27 +8,11 @@ using NHibernate.Linq;
 
 namespace RaffleLib.Domain.Repositories.NHibernateRepositories
 {
-    public class NHibernateMeetingRepository : IEntityRepository<Meeting>
+    public class NHibernateMeetingRepository : NHibernateRepositoryBase<Meeting>
     {
         private ISession _session;
         public NHibernateMeetingRepository(ISession session)
-        {
-            _session = session;
-        }
-
-        public IQueryable<Meeting> Query
-        {
-            get { return _session.Query<Meeting>(); }
-        }
-
-        public void Save(Meeting entity)
-        {
-            _session.SaveOrUpdate(entity);
-        }
-
-        public void Delete(Meeting entity)
-        {
-            _session.Delete(entity);
-        }
+            : base(session)
+        { }
     }
 }

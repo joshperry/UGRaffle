@@ -7,9 +7,11 @@ using RaffleLib.Domain.Entities;
 using RaffleLib.Domain;
 using RaffleLib.Domain.Queries;
 using RaffleLib.Domain.Repositories.Fake;
+using RaffleWeb.Infrastructure.Auth;
 
 namespace RaffleWeb.Controllers
 {
+    [Authorize(Roles="Admin")]
     public class MeetingController : Controller
     {
         private IEntityRepository<Meeting> _meetingRepo;
@@ -18,12 +20,6 @@ namespace RaffleWeb.Controllers
             _meetingRepo = meetingRepo;
         }
 
-        public ViewResult Index(IGetCurrentMeetingAndRaffleItems query)
-        {
-            return View(query.Result());
-        }
-
-        [Authorize(Roles="Admin")]
         public ViewResult List(IGetAllMeetings query)
         {
             return View(query.Result());

@@ -71,7 +71,7 @@ namespace RaffleTests
             var query = new Mock<IGetCurrentMeetingAndRaffleItems>();
             query.Setup(x => x.Result()).Returns(meeting);
 
-            var result = new MeetingController(null).Index(query.Object);
+            var result = new RegistrationController(null).Index(query.Object);
 
             Assert.AreEqual(meeting, result.ViewData.Model);
             Assert.AreEqual(string.Empty, result.ViewName); // default view

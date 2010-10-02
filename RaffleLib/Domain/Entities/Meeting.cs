@@ -24,5 +24,15 @@ namespace RaffleLib.Domain.Entities
         public virtual int TicketsForRegistering { get; set; }
         
         public virtual IList<RaffleItem> RaffleItems { get; set; }
+
+        public virtual Registration Register(Member member)
+        {
+            return new Registration
+            {
+                Meeting = this,
+                Member = member,
+                Time = DateTime.Now
+            };
+        }
     }
 }

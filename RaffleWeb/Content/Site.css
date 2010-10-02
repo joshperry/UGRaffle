@@ -27,11 +27,15 @@
     display: none;
 }
 
+html, body, h1, h2, h3, h4, h5 
+{
+    margin: 0;
+    padding: 0;    
+}
+
 html, body 
 {
     height: 100%;
-    margin: 0;
-    padding: 0;
 }
 
 html
@@ -48,9 +52,9 @@ body
 
 #header h1
 {
-
     font-family: Arial;
     font-size: 5em;
+    margin-bottom: .67em;
 }
 
 #content 

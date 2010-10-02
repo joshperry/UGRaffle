@@ -14,9 +14,11 @@ namespace RaffleWeb.Controllers
 {
     public class MemberController : Controller
     {
+        private IEntityRepository<Member> _repo;
         private IFormsAuthentication _auth;
-        public MemberController(IFormsAuthentication auth)
+        public MemberController(IEntityRepository<Member> repo, IFormsAuthentication auth)
         {
+            _repo = repo;
             _auth = auth;
         }
 
@@ -25,8 +27,33 @@ namespace RaffleWeb.Controllers
             return View(new LoginViewModel());
         }
 
+        public ViewResult Create()
+        {
+            return View(new Member());
+        }
+
         [HttpPost]
-        public ActionResult Login(IGetUserByCredentials query, LoginViewModel model, string returnUrl)
+        public ActionResult Create(IGetMemberByEmail query, Member member)
+        {
+            if (ModelState.IsValid)
+            {
+                var dbmember = query.Result(member.Email);
+                if (dbmember == null)
+                {
+                    _repo.Save(member);
+                    return Redirect("~/");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "A member with this email already exists");
+                }
+            }
+            
+            return View(member);
+        }
+
+        [HttpPost]
+        public ActionResult Login(IGetMemberByCredentials query, LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -42,6 +69,12 @@ namespace RaffleWeb.Controllers
             }
             else
                 return View(model);
+        }
+
+        public RedirectResult Logout()
+        {
+            _auth.SignOut();
+            return Redirect("~/");
         }
     }
 }

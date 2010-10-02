@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using RaffleLib.Domain.Entities;
 using NHibernate;
-using NHibernate.Linq;
 
 namespace RaffleLib.Domain.Repositories.NHibernateRepositories
 {
-    public class NHibernateMemberRepository : NHibernateRepositoryBase<Member>
+    public class NHibernateRaffleEntryRepository : NHibernateRepositoryBase<RaffleEntry>
     {
-        public NHibernateMemberRepository(ISession session)
+        public NHibernateRaffleEntryRepository(ISession session)
             : base(session)
         { }
     }

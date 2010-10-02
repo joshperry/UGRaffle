@@ -89,7 +89,8 @@ namespace RaffleTests
         {
             var role = "Admin";
             var email = "josh@6bit.com";
-            var member = new Member { Email = email, Roles = new string[]{ role } };
+            var member = new Member { Email = email };
+            member.Roles.Add(role);
             var repo = new Mock<IEntityRepository<Member>>();
             repo.SetupGet(x => x.Query).Returns(new Member[] { member }.AsQueryable());
             repo.Setup(x => x.Save(member)).Verifiable();

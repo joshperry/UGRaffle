@@ -7,7 +7,7 @@ using RaffleLib.Security;
 
 namespace RaffleLib.Domain.Queries
 {
-    public class GetMemberByCredentials : IGetUserByCredentials
+    public class GetMemberByCredentials : IGetMemberByCredentials
     {
         IEntityRepository<Member> _repo;
         IHasher _hasher;
