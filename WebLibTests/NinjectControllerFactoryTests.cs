@@ -10,7 +10,7 @@ using Ninject;
 using System.Web.Routing;
 using System.Web;
 
-namespace RaffleTests
+namespace WebLibTests
 {
     public class DummyController : IController
     {
@@ -19,7 +19,6 @@ namespace RaffleTests
             throw new NotImplementedException();
         }
     }
-
 
     [TestClass]
     public class NinjectControllerFactoryTests

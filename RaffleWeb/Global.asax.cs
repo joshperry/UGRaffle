@@ -34,15 +34,28 @@ namespace RaffleWeb
 
             Kernel = new StandardKernel(
                 new WebLib.Ninject.NinjectControllerModule(System.Reflection.Assembly.GetExecutingAssembly()),
-                new WebLib.PersistenceConfigurerModule(),
+                new Infrastructure.PersistenceConfigurerModule(),
                 new RaffleLib.Domain.Repositories.NHibernateRepositories.NHibernateConfigModule(),
                 new RaffleLib.Domain.Repositories.NHibernateRepositories.NHibernateRepositoryModule(),
                 new WebLib.SessionPerRequestModule(),
-                new WebLib.Auth.AuthModule()
+                new Infrastructure.AuthModule()
             );
 
             ControllerBuilder.Current.SetControllerFactory(new WebLib.Ninject.NinjectControllerFactory(Kernel));
-            WebLib.QueryModelBinder.AddAllBinders(typeof(RaffleLib.Domain.Queries.IQuery).Assembly, Kernel);
+            AddQueryModelBinders(typeof(RaffleLib.Domain.Queries.IQuery).Assembly, Kernel);
+        }
+
+        public static void AddQueryModelBinders(System.Reflection.Assembly assembly, IKernel kernel)
+        {
+            var queryTypes = assembly.GetExportedTypes()
+                .Where(t => typeof(RaffleLib.Domain.Queries.IQuery).IsAssignableFrom(t));
+
+            foreach (var queryType in queryTypes)
+            {
+                var queryInterface = queryType.GetInterfaces().Where(i => i.Name.EndsWith(queryType.Name)).FirstOrDefault();
+                if (queryInterface != null)
+                    ModelBinders.Binders.Add(queryInterface, new WebLib.Ninject.NinjectModelBinder(queryType, kernel));
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ using System.Configuration.Provider;
 using System.Transactions;
 using Ninject;
 
-namespace WebLib.Auth
+namespace RaffleWeb.Infrastructure
 {
     public class MemberRoleProvider : RoleProvider
     {

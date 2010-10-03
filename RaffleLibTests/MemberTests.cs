@@ -13,7 +13,7 @@ using System.Web.Mvc;
 using WebLib.Auth;
 using RaffleLib.Security;
 
-namespace RaffleTests
+namespace RaffleLibTests
 {
     [TestClass]
     public class MemberTests

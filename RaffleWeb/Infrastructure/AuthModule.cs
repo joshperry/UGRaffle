@@ -5,8 +5,9 @@ using System.Web;
 using Ninject.Modules;
 using RaffleLib.Security;
 using System.Web.Security;
+using WebLib.Auth;
 
-namespace WebLib.Auth
+namespace RaffleWeb.Infrastructure
 {
     public class AuthModule : NinjectModule
     {

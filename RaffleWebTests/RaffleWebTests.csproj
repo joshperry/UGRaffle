@@ -6,11 +6,11 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{0B232701-F00B-491B-9D3F-3E16E113CAB0}</ProjectGuid>
+    <ProjectGuid>{A6F0B9B7-C2CB-4A4B-979F-6E6ED977D69F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RaffleTests</RootNamespace>
-    <AssemblyName>RaffleTests</AssemblyName>
+    <RootNamespace>RaffleWebTests</RootNamespace>
+    <AssemblyName>RaffleWebTests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -33,35 +33,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentNHibernate, Version=1.1.0.0, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\FluentNHibernate.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Moq">
       <HintPath>..\lib\Moq.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate, Version=3.0.0.1002, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\NHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate.ByteCode.Castle">
-      <HintPath>..\lib\NHibernate.ByteCode.Castle.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject">
-      <HintPath>..\lib\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.SQLite, Version=1.0.66.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Routing" />
@@ -73,24 +54,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MeetingTests.cs" />
-    <Compile Include="MemberTests.cs" />
-    <Compile Include="NHibernateTests.cs" />
-    <Compile Include="NinjectControllerFactoryTests.cs" />
+    <Compile Include="MemberRoleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SecurityTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RaffleWeb\RaffleWeb.csproj">
-      <Project>{3F7C644F-0CC8-4216-9C1E-667A50085CFF}</Project>
-      <Name>RaffleWeb</Name>
-    </ProjectReference>
     <ProjectReference Include="..\RaffleLib\RaffleLib.csproj">
       <Project>{A4DD7B3B-C6E6-4F38-88F7-17486B621C17}</Project>
       <Name>RaffleLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WebLib\WebLib.csproj">
-      <Project>{ECA67321-C608-4D5A-A8B3-2D33725B6F05}</Project>
-      <Name>WebLib</Name>
+    <ProjectReference Include="..\RaffleWeb\RaffleWeb.csproj">
+      <Project>{3F7C644F-0CC8-4216-9C1E-667A50085CFF}</Project>
+      <Name>RaffleWeb</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

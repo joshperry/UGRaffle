@@ -11,7 +11,7 @@ using System.Data.SQLite;
 using NHibernate;
 using RaffleLib.Domain;
 
-namespace RaffleTests
+namespace RaffleLibTests
 {
     [TestClass]
     public class NHibernateTests

@@ -3,14 +3,15 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RaffleLib.Domain.Entities;
-using RaffleLib.Domain;
-using Moq;
-using RaffleLib.Domain.Queries;
-using RaffleWeb.Controllers;
 using System.Web.Mvc;
+using Moq;
+using RaffleLib.Domain.Entities;
+using RaffleLib.Domain.Queries;
+using RaffleLib.Domain;
+using RaffleWeb.Controllers;
 
-namespace RaffleTests
+
+namespace RaffleWebTests
 {
     [TestClass]
     public class MeetingTests
@@ -20,48 +21,6 @@ namespace RaffleTests
             var repo = new Mock<IEntityRepository<Meeting>>();
             repo.SetupGet(x => x.Query).Returns(meetings.AsQueryable());
             return repo;
-        }
-
-        [TestMethod]
-        public void Can_query_current_meeting()
-        {
-            var meeting = new Meeting { Date = DateTime.Today };
-            var repo = GetMeetingRepoMock(meeting);
-
-            var result = new GetCurrentMeetingAndRaffleItems(repo.Object).Result();
-
-            Assert.AreEqual(meeting, result);
-        }
-
-        [TestMethod]
-        public void Can_query_meeting_by_id()
-        {
-            var meeting = new Meeting();
-            var repo = GetMeetingRepoMock(meeting);
-
-            var result = new GetMeetingById(repo.Object).Result(meeting.Id);
-
-            Assert.AreEqual(meeting, result);
-        }
-
-        [TestMethod]
-        public void Can_query_all_meetings()
-        {
-            var repo = GetMeetingRepoMock(new Meeting(), new Meeting());
-
-            var result = new GetAllMeetings(repo.Object).Result();
-
-            Assert.AreEqual(2, result.Count());
-        }
-
-        [TestMethod]
-        public void Can_query_page_all_meetings()
-        {
-            var repo = GetMeetingRepoMock(new Meeting(), new Meeting(), new Meeting(), new Meeting());
-
-            var result = new GetAllMeetings(repo.Object).Result(2, 1);
-
-            CollectionAssert.AreEqual(repo.Object.Query.Take(2).ToArray(), result.ToArray());
         }
 
         [TestMethod]
