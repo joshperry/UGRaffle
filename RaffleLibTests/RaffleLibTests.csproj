@@ -75,7 +75,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MeetingTests.cs" />
+    <Compile Include="MeetingQuerySpecs.cs" />
     <Compile Include="MemberTests.cs" />
     <Compile Include="NHibernateTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -11,7 +11,7 @@ using RaffleWeb.Infrastructure;
 namespace RaffleWebTests
 {
     [TestClass]
-    public class MemberRoleTests
+    public class MemberRoleProviderTests
     {
         [TestMethod]
         public void Can_get_users_by_role()

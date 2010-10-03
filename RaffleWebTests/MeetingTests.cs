@@ -1,6 +1,4 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Web.Mvc;
@@ -9,7 +7,6 @@ using RaffleLib.Domain.Entities;
 using RaffleLib.Domain.Queries;
 using RaffleLib.Domain;
 using RaffleWeb.Controllers;
-
 
 namespace RaffleWebTests
 {
