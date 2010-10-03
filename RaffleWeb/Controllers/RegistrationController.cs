@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using RaffleLib.Domain.Queries;
 using RaffleLib.Domain;
 using RaffleLib.Domain.Entities;
+using RaffleWeb.Models;
 
 namespace RaffleWeb.Controllers
 {
@@ -17,9 +15,14 @@ namespace RaffleWeb.Controllers
             _repo = repo;
         }
 
-        public ViewResult Index(IGetCurrentMeetingAndRaffleItems query)
+        public ViewResult Index(IGetCurrentMeetingAndRaffleItems query, IGetMemberByEmail memberQuery)
         {
-            return View(query.Result());
+            var vm = new IndexViewModel
+                         {
+                             Meeting = query.Result(),
+                             Member = memberQuery.Result(User.Identity.Name),
+                         };
+            return View(vm);
         }
 
         [Authorize]

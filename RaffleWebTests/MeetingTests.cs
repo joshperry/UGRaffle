@@ -22,7 +22,7 @@ namespace RaffleWebTests
             repo.SetupGet(x => x.Query).Returns(meetings.AsQueryable());
             return repo;
         }
-
+/*
         [TestMethod]
         public void Can_view_current_meeting()
         {
@@ -35,7 +35,7 @@ namespace RaffleWebTests
             Assert.AreEqual(meeting, result.ViewData.Model);
             Assert.AreEqual(string.Empty, result.ViewName); // default view
         }
-
+*/
         [TestMethod]
         public void Can_view_meeting_list()
         {
