@@ -10,6 +10,5 @@ namespace RaffleWeb.Models
     {
         public Meeting Meeting { get; set; }
         public Member Member { get; set; }
-        public bool ShowLogin { get; set; }
     }
 }

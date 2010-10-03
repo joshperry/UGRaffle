@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<RaffleWeb.Models.IndexViewModel>" %>
+<%@ Import Namespace="RaffleWeb.Models" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 UGRaffle : Current Meeting
@@ -27,9 +28,9 @@ UGRaffle : Current Meeting
     <% } %>
     
     <%
-        if (!Model.ShowLogin)
+        if (Model.Member == null)
         {
-            Html.RenderPartial("CompactLogin");
+            Html.RenderPartial("CompactLogin", new LoginViewModel());
         }
         else
         {
