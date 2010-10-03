@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RaffleLib.Domain.Entities;
 using RaffleLib.Domain;
 using Moq;
 using RaffleLib.Domain.Queries;
-using RaffleWeb.Controllers;
-using System.Web.Mvc;
+using Machine.Specifications;
 
 namespace RaffleLibTests
 {
@@ -63,5 +60,10 @@ namespace RaffleLibTests
 
             CollectionAssert.AreEqual(repo.Object.Query.Take(2).ToArray(), result.ToArray());
         }
+    }
+
+    public abstract class with_meeting_for_today
+    {
+        
     }
 }
