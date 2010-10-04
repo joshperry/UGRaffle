@@ -56,9 +56,9 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MeetingControllerTests.cs" />
+    <Compile Include="MemberControllerSpecs.cs" />
     <Compile Include="MeetingTests.cs" />
-    <Compile Include="MemberRoleTests.cs" />
+    <Compile Include="MemberRoleProviderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

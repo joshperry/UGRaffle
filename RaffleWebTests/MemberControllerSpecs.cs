@@ -26,9 +26,7 @@ namespace RaffleWebTests
     {
         static ViewResult result;
 
-        Because of = () => result =
-                             new MemberController(null, AuthMock.Object)
-                                .Login(GetByCredentialsQuery,
+        Because of = () => result = new MemberController(null, AuthMock.Object).Login(GetByCredentialsQuery,
                                     new LoginViewModel
                                         {
                                             Email = LoginModel.Email,
@@ -38,8 +36,7 @@ namespace RaffleWebTests
         It should_not_set_auth_cookie = () => 
             AuthMock.Verify(x => x.SetAuthCookie(Moq.It.IsAny<string>(), Moq.It.IsAny<bool>()), Times.Never());
 
-        It should_redirect_to_default_view = () =>
-                                                     result.ViewName.ShouldEqual(string.Empty);
+        It should_redirect_to_default_view = () => result.ViewName.ShouldEqual(string.Empty);
     }
 
     [Subject("Login Member")]
