@@ -50,9 +50,12 @@ namespace RaffleWeb.Controllers
             return RedirectToAction("List");
         }
 
-        public ViewResult Edit(IGetMeetingById query, Guid id)
+        public ActionResult Edit(IGetMeetingById query, Guid id)
         {
             var meeting = query.Result(id);
+
+            if(meeting == null)
+                return RedirectToAction("List");
 
             return View(meeting);
         }

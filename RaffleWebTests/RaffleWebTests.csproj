@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MemberControllerSpecs.cs" />
-    <Compile Include="MeetingTests.cs" />
+    <Compile Include="MeetingControllerSpecs.cs" />
     <Compile Include="MemberRoleProviderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
