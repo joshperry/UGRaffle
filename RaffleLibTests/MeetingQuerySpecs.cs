@@ -8,7 +8,7 @@ using Machine.Specifications;
 
 namespace RaffleLibTests
 {
-    [Subject("Query Meetings")]
+    [Subject(typeof(GetCurrentMeetingAndRaffleItems), "Query Meetings")]
     public class when_querying_for_todays_meeting : with_meeting_for_today
     {
         private static Meeting meeting;
@@ -20,6 +20,7 @@ namespace RaffleLibTests
         It should_get_todays_meeting = () => meeting.Date.ShouldEqual(DateTime.Today);
     }
 
+    [Subject(typeof(GetCurrentMeetingAndRaffleItems), "Query Meetings")]
     public class when_querying_for_todays_meeting_and_there_is_not_a_meeting_today : with_list_of_meetings
     {
         private static Meeting meeting;
@@ -29,7 +30,7 @@ namespace RaffleLibTests
         It should_be_null = () => meeting.ShouldBeNull();
     }
 
-    [Subject("Query Meetings")]
+    [Subject(typeof(GetAllMeetings), "Query Meetings")]
     public class when_querying_for_all_meetings : with_list_of_meetings
     {
         static IEnumerable<Meeting> meetings;
@@ -39,7 +40,7 @@ namespace RaffleLibTests
         It should_get_all_meetings = () => meetings.Count().ShouldEqual(meetingRepo.Query.Count());
     }
     
-    [Subject("Query Meetings")]
+    [Subject(typeof(GetAllMeetings), "Query Meetings")]
     public class when_querying_all_meetings_and_paging : with_list_of_meetings
     {
         private const int PAGE_SIZE = 2;
@@ -53,6 +54,7 @@ namespace RaffleLibTests
         It should_get_proper_meetings = () => meetings.ShouldContainOnly(meetingRepo.Query.Skip(PAGE_SIZE*(PAGE_INDEX-1)).Take(PAGE_INDEX));
     }
 
+    [Subject(typeof(GetMeetingById), "Query Meetings")]
     public class when_querying_for_existing_meeting_by_id : with_list_of_meetings
     {
         private static Meeting meeting;

@@ -13,7 +13,7 @@ using It = Machine.Specifications.It;
 
 namespace RaffleLibTests
 {
-    [Subject("Query Members")]
+    [Subject(typeof(GetMemberByCredentials), "Query Members")]
     public class when_querying_for_member_with_valid_credentials : with_member_credential_mocks
     {
         private static Member result;
@@ -26,7 +26,7 @@ namespace RaffleLibTests
         It should_get_proper_member = () => result.ShouldBeTheSameAs(member);
     }
 
-    [Subject("Query Members")]
+    [Subject(typeof(GetMemberByCredentials), "Query Members")]
     public class when_querying_for_member_with_invalid_credentials : with_member_credential_mocks
     {
         private static Member result;
@@ -37,7 +37,7 @@ namespace RaffleLibTests
         It should_get_no_member = () => result.ShouldBeNull();
     }
 
-    [Subject("Query Members")]
+    [Subject(typeof(GetMembersInRole), "Query Members")]
     public class when_querying_for_members_in_nonempty_role : with_member_role_mocks
     {
         private static IEnumerable<Member> result;
@@ -47,7 +47,7 @@ namespace RaffleLibTests
         It should_get_members_in_role = () => result.ShouldContainOnly(memberRepo.Query);
     }
 
-    [Subject("Query Members")]
+    [Subject(typeof(GetMembersInRole), "Query Members")]
     public class when_querying_for_members_in_empty_role : with_member_role_mocks
     {
         private static IEnumerable<Member> result;

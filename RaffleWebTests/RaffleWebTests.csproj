@@ -56,10 +56,12 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControllerActionBehaviors.cs" />
     <Compile Include="MemberControllerSpecs.cs" />
     <Compile Include="MeetingControllerSpecs.cs" />
     <Compile Include="MemberRoleProviderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistrationControllerSpecs.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RaffleLib\RaffleLib.csproj">

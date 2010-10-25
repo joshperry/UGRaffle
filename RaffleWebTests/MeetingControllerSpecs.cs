@@ -16,13 +16,11 @@ namespace RaffleWebTests
     [Subject(typeof(MeetingController), "List Meetings")]
     public class when_displaying_list_of_meetings : with_get_all_query
     {
-        static ViewResult result;
+        protected static ViewResult result;
 
         Because of = () => result = new MeetingController(null).List(query);
 
-        It should_display_a_view = () => result.ShouldNotBeNull();
-
-        It should_display_the_default_view = () => result.ViewName.ShouldBeEmpty();
+        Behaves_like<Action_returns_default_view_result> returns_default_view_result;
 
         It should_set_view_model_to_list_of_meetings = () => ((IEnumerable<Meeting>)result.ViewData.Model).ShouldContainOnly(meetings);
     }
@@ -30,13 +28,11 @@ namespace RaffleWebTests
     [Subject(typeof(MeetingController), "Create Meeting")]
     public class when_displaying_create_meeting_view : with_empty_meeting_and_repo
     {
-        static ViewResult result;
+        protected static ViewResult result;
 
         Because of = () => result = new MeetingController(null).Create();
 
-        It should_display_a_view = () => result.ShouldNotBeNull();
-
-        It should_display_default_view = () => result.ViewName.ShouldBeEmpty();
+        Behaves_like<Action_returns_default_view_result> returns_default_view_result;
 
         It should_set_view_model_to_empty_meeting = () => result.ViewData.Model.ShouldNotBeNull();
     }
@@ -58,7 +54,7 @@ namespace RaffleWebTests
     [Subject(typeof(MeetingController), "Create Meeting")]
     public class when_submitting_meeting_create_view_with_invalid_data : with_empty_meeting_and_repo
     {
-        static ViewResult result;
+        protected static ViewResult result;
 
         Because of = () =>
                          {
@@ -69,9 +65,7 @@ namespace RaffleWebTests
 
         It should_not_save_meeting_to_repository = () => repoMock.Verify(x => x.Save(meeting), Times.Never());
 
-        It should_display_a_view = () => result.ShouldNotBeNull();
-
-        It should_display_default_view = () => result.ViewName.ShouldBeEmpty();
+        Behaves_like<Action_returns_default_view_result> returns_default_view_result;
     }
 
     [Subject(typeof(MeetingController), "Delete Meeting")]
@@ -105,13 +99,11 @@ namespace RaffleWebTests
     [Subject(typeof(MeetingController), "Edit Meeting")]
     public class when_displaying_edit_view_for_existing_meeting : with_get_by_id_query
     {
-        static ViewResult result;
+        protected static ViewResult result;
 
         Because of = () => result = new MeetingController(repoMock.Object).Edit(query, meeting.Id) as ViewResult;
 
-        It should_display_a_view = () => result.ShouldNotBeNull();
-
-        It should_display_default_view = () => result.ViewName.ShouldEqual(string.Empty);
+        Behaves_like<Action_returns_default_view_result> returns_default_view_result;
 
         It should_set_view_model_to_meeting = () => result.ViewData.Model.ShouldBeTheSameAs(meeting);
     }
@@ -145,7 +137,7 @@ namespace RaffleWebTests
     [Subject(typeof(MeetingController), "Edit Meeting")]
     public class when_saving_meeting_edit_view_with_invalid_data : with_empty_meeting_and_repo
     {
-        static ViewResult result;
+        protected static ViewResult result;
 
         Because of = () =>
                          {
@@ -156,9 +148,7 @@ namespace RaffleWebTests
 
         It should_not_save_meeting_to_repository = () => repoMock.Verify(x => x.Save(Moq.It.IsAny<Meeting>()), Times.Never());
 
-        It should_display_a_view = () => result.ShouldNotBeNull();
-
-        It should_display_default_view = () => result.ViewName.ShouldEqual(string.Empty);
+        Behaves_like<Action_returns_default_view_result> returns_default_view_result;
 
         It should_set_view_model_to_invalid_meeting = () => result.ViewData.Model.ShouldBeTheSameAs(meeting);
     }
@@ -192,6 +182,11 @@ namespace RaffleWebTests
     public abstract class with_empty_meeting_and_repo
     {
         protected static readonly Meeting meeting = new Meeting{ Id = Guid.NewGuid() };
-        protected static readonly Mock<IEntityRepository<Meeting>> repoMock = new Mock<IEntityRepository<Meeting>>();
+        protected static Mock<IEntityRepository<Meeting>> repoMock;
+
+        Establish context = () =>
+        {
+            repoMock = new Mock<IEntityRepository<Meeting>>();
+        };
     }
 }

@@ -9,25 +9,22 @@ namespace WebLib.Ninject
 {
     public class ConventionControllerFinder
     {
-        Assembly[] _assemblies;
-        static IEnumerable<Type> _cache;
+        IEnumerable<Type> _controllers;
         public ConventionControllerFinder(params Assembly[] assemblies)
         {
-            _assemblies = assemblies;
+            _controllers =
+                from a in assemblies
+                from c in a.GetExportedTypes()
+                where !c.IsAbstract
+                    && !c.IsInterface
+                    && c.Name.EndsWith("Controller")
+                    && typeof(IController).IsAssignableFrom(c)
+                select c;
         }
 
         public IEnumerable<Type> GetControllers()
         {
-            if (_cache == null)
-                _cache = from a in _assemblies
-                         from c in a.GetExportedTypes()
-                         where !c.IsAbstract
-                             && !c.IsInterface
-                             && c.Name.EndsWith("Controller")
-                             && typeof(IController).IsAssignableFrom(c)
-                         select c;
-
-            return _cache;
+            return _controllers;
         }
     }
 }
