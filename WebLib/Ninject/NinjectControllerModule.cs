@@ -4,22 +4,23 @@ using System.Linq;
 using System.Web;
 using Ninject.Modules;
 using System.Reflection;
+using System.Web.Mvc;
 
 namespace WebLib.Ninject
 {
     public class NinjectControllerModule : NinjectModule
     {
-        ConventionControllerFinder _finder;
-        public NinjectControllerModule(params Assembly[] assemblies)
+        IFindControllersStrategy _finder;
+        public NinjectControllerModule(IFindControllersStrategy finder)
         {
-            _finder = new ConventionControllerFinder(assemblies);
+            _finder = finder;
         }
 
         public override void Load()
         {
             foreach (var controller in _finder.GetControllers())
             {
-                Kernel.Bind(controller).ToSelf();
+                Kernel.Bind(controller).To<IController>();
             }
         }
     }

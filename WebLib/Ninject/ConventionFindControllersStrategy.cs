@@ -7,17 +7,17 @@ using System.Web.Mvc;
 
 namespace WebLib.Ninject
 {
-    public class ConventionControllerFinder
+    public class ConventionFindControllersStrategy : IFindControllersStrategy
     {
         IEnumerable<Type> _controllers;
-        public ConventionControllerFinder(params Assembly[] assemblies)
+        public ConventionFindControllersStrategy(params Assembly[] assemblies)
         {
             _controllers =
                 from a in assemblies
                 from c in a.GetExportedTypes()
                 where !c.IsAbstract
-                    && !c.IsInterface
-                    && c.Name.EndsWith("Controller")
+                    && c.IsPublic
+                    && c.Name.EndsWith("Controller", StringComparison.OrdinalIgnoreCase)
                     && typeof(IController).IsAssignableFrom(c)
                 select c;
         }

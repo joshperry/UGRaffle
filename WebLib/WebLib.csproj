@@ -58,7 +58,8 @@
   <ItemGroup>
     <Compile Include="Auth\FormsAuthenticationService.cs" />
     <Compile Include="Auth\IFormsAuthentication.cs" />
-    <Compile Include="Ninject\ConventionControllerFinder.cs" />
+    <Compile Include="Ninject\ConventionFindControllersStrategy.cs" />
+    <Compile Include="Ninject\IFindControllersStrategy.cs" />
     <Compile Include="Ninject\NinjectControllerFactory.cs" />
     <Compile Include="Ninject\NinjectControllerModule.cs" />
     <Compile Include="Ninject\NinjectModelBinder.cs" />

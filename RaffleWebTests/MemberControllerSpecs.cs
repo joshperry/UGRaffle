@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using RaffleLib.Domain;
 using RaffleLib.Domain.Entities;

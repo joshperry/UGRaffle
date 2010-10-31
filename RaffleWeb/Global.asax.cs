@@ -33,7 +33,7 @@ namespace RaffleWeb
             RegisterRoutes(RouteTable.Routes);
 
             Kernel = new StandardKernel(
-                new WebLib.Ninject.NinjectControllerModule(System.Reflection.Assembly.GetExecutingAssembly()),
+                new WebLib.Ninject.NinjectControllerModule(new WebLib.Ninject.ConventionFindControllersStrategy(System.Reflection.Assembly.GetExecutingAssembly())),
                 new Infrastructure.PersistenceConfigurerModule(),
                 new RaffleLib.Domain.Repositories.NHibernateRepositories.NHibernateConfigModule(),
                 new RaffleLib.Domain.Repositories.NHibernateRepositories.NHibernateRepositoryModule(),
